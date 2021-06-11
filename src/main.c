@@ -22,10 +22,6 @@ void test_int_list() {
         printf("%d\n", int_list_get(int_list, i));
     }
 
-    for(int i = 0; i < 1000; i++) {
-
-    }
-
     int_list_free(int_list);
 }
 
