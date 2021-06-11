@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "person.h"
 #include "int_list.h"
@@ -26,7 +27,5 @@ void test_int_list() {
 }
 
 int main() {
-//    test_person();
     test_int_list();
-    return 0;
 }
