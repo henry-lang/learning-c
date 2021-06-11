@@ -8,7 +8,7 @@ struct Person {
 };
 
 struct Person* person_init();
-void person_delete(struct Person* person);
+void person_free(struct Person* person);
 
 void person_set_name(struct Person* person, char* name);
 void person_set_gender(struct Person* person, char gender);

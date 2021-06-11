@@ -6,7 +6,7 @@ struct Person* person_init() {
     return person;
 }
 
-void person_delete(struct Person* person) {
+void person_free(struct Person* person) {
     free(person);
 }
 

@@ -2,7 +2,7 @@
 #define INT_LIST_H
 
 struct IntList {
-    int* values;
+    int* data;
     unsigned int length;
 };
 
