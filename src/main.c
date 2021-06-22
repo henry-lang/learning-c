@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "person.h"
-#include "int_list.h"
+#include "list.h"
 
 void test_person() {
     struct Person* person = person_init();
@@ -15,17 +15,27 @@ void test_person() {
     person_free(person);
 }
 
-void test_int_list() {
-    struct IntList* int_list = int_list_init();
+void test_list() {
+    List* list = list_init();
 
-    for(int i = 0; i < 1000; i++) {
-        int_list_append(int_list, i);
-        printf("%d\n", int_list_get(int_list, i));
+    for(int i = 0; i < 100000; i++) {
+        list_push(list, i);
     }
 
-    int_list_free(int_list);
+    for(int i = 0; i < 60000; i++) {
+        list_pop(list);
+    }
+
+    for(int i = 0; i < list_length(list); i++) {
+        printf("%d\n", (int) list_get(list, i));
+    }
+
+    printf("Length: %d\n", list->curr_length);
+    printf("Allocated: %d\n", list->alloc_length);
+
+    list_free(list);
 }
 
 int main() {
-    test_int_list();
+    test_list();
 }

@@ -3,4 +3,4 @@ project(c_testing C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(c_testing src/main.c src/person.c src/person.h src/int_list.c src/int_list.h)
+add_executable(c_testing src/main.c src/person.c src/person.h src/list.c src/list.h)
