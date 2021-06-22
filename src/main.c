@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "person.h"
-#include "list.h"
+#include "util/list.h"
 
 void test_person() {
     struct Person* person = person_init();
