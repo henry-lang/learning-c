@@ -37,8 +37,7 @@ void list_insert(List* list, void* value, size_t index) {
 }
 
 void list_remove(List* list, size_t index) {
-    if (index == list->curr_length)
-        return;
+    if (index == list->curr_length) return;
 
     memmove(list->data+index, list->data+(index+1), (list->curr_length-index) * sizeof(void*));
     list->curr_length--;

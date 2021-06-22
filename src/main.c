@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "person.h"
+#include "old/person.h"
 #include "util/list.h"
 
 void test_person() {
