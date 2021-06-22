@@ -87,5 +87,12 @@ bool list_shrink(List* list) {
 }
 
 void list_clear(List* list) {
-
+    list->curr_length = 0;
+    void** new_data = realloc(list->data, sizeof(void*) * INITIAL_SIZE);
+    if(new_data != NULL) {
+        list->data = new_data;
+        list->alloc_length = INITIAL_SIZE;
+    } else {
+        printf("Failed to clear array?.\n");
+    }
 }

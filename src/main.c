@@ -33,6 +33,11 @@ void test_list() {
     printf("Length: %d\n", list->curr_length);
     printf("Allocated: %d\n", list->alloc_length);
 
+    list_clear(list);
+
+    printf("Length: %d\n", list->curr_length);
+    printf("Allocated: %d\n", list->alloc_length);
+
     list_free(list);
 }
 
