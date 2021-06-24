@@ -1,6 +1,6 @@
 #ifndef LIST_H
 #define LIST_H
-
+//what
 #define INITIAL_SIZE 1
 
 #include <stdbool.h>
