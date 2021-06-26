@@ -1,34 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "old/person.h"
 #include "util/list.h"
 #include "util/string.h"
-
-void test_person() {
-    struct Person* person = person_init();
-    person_set_name(person, "Henry Langmack");
-    person_set_age(person, 13);
-    person_set_gender(person, 'm');
-    printf("%s\n", person->name);
-    printf("%d\n", person->age);
-    printf("%c\n", person->gender);
-    person_free(person);
-}
 
 void test_list() {
     List* list = list_init();
 
-    for(int i = 0; i < 100000; i++) {
+    for(char i = 0; i < 100; i++) {
         list_push(list, i);
     }
 
-    for(int i = 0; i < 60000; i++) {
-        list_pop(list);
-    }
-
-    for(int i = 0; i < list_length(list); i++) {
-        printf("%d\n", (int) list_get(list, i));
+    for(char i = 0; i < list_length(list); i++) {
+        printf("%c\n", list_get_cast(list, i, char));
     }
 
     printf("Length: %d\n", list->curr_length);
@@ -40,6 +23,12 @@ void test_list() {
     printf("Allocated: %d\n", list->alloc_length);
 
     list_free(list);
+}
+
+void test_list_advanced() {
+    List* list = list_init();
+
+
 }
 
 int main() {

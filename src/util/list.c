@@ -40,8 +40,8 @@ void list_remove(List* list, size_t index) {
     if (index == list->curr_length) return;
 
     memmove(list->data+index, list->data+(index+1), (list->curr_length-index) * sizeof(void*));
-    list->curr_length--;
 
+    list->curr_length--;
     if(list->curr_length < list->alloc_length >> 1) {
         list_shrink(list);
     }
@@ -54,6 +54,8 @@ void list_set(List* list, size_t index, void* value) {
 void* list_get(List* list, size_t index) {
     return list->data[index];
 }
+
+// #define list_get_cast(type, list, index) ((type*) list_get(list, index))
 
 size_t list_length(List* list) {
     return list->curr_length;
