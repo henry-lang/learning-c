@@ -3,6 +3,7 @@
 
 #include "old/person.h"
 #include "util/list.h"
+#include "util/string.h"
 
 void test_person() {
     struct Person* person = person_init();
@@ -42,5 +43,16 @@ void test_list() {
 }
 
 int main() {
-    test_list();
+    List* list = list_init();
+
+    for(int i = 0; i < 1000; i++) {
+        String* str = string_init("Hello, World!");
+        list_push(list, str);
+    }
+
+    for(int i = 0; i < 1000; i++) {
+        list_pop(list);
+    }
+
+    list_free(list);
 }
