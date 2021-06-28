@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-#include "util/list.h"
-#include "util/string.h"
+#include "util/datatypes/list.h"
+#include "util/datatypes/string.h"
 
 void test_list() {
     List* list = list_init();
@@ -32,16 +33,9 @@ void test_list_advanced() {
 }
 
 int main() {
-    List* list = list_init();
-
+    String* name = string_init("Henry");
     for(int i = 0; i < 1000; i++) {
-        String* str = string_init("Hello, World!");
-        list_push(list, str);
+        string_append(name, " Langmack");
     }
-
-    for(int i = 0; i < 1000; i++) {
-        list_pop(list);
-    }
-
-    list_free(list);
+    string_free(name);
 }

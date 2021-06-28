@@ -26,6 +26,12 @@ void list_pop(List* list) {
     list_remove(list, list->curr_length - 1);
 }
 
+void list_pop_free(List* list, void free_func(void* reference, ...)) {
+    free_func(list->data[list->curr_length - 1]);
+    // Pop freed pointer
+    list_pop(list);
+}
+
 void list_insert(List* list, void* value, size_t index) {
     if (list->alloc_length == list->curr_length) {
         if (!list_grow(list)) return;
@@ -38,13 +44,18 @@ void list_insert(List* list, void* value, size_t index) {
 
 void list_remove(List* list, size_t index) {
     if (index == list->curr_length) return;
-
     memmove(list->data+index, list->data+(index+1), (list->curr_length-index) * sizeof(void*));
 
     list->curr_length--;
     if(list->curr_length < list->alloc_length >> 1) {
         list_shrink(list);
     }
+}
+
+void list_remove_free(List* list, size_t index, void free_func(void* reference, ...)) {
+    free_func(list->data[index]);
+    // Remove freed pointer
+    list_remove(list, index);
 }
 
 void list_set(List* list, size_t index, void* value) {
@@ -96,4 +107,13 @@ void list_clear(List* list) {
     } else {
         printf("Failed to clear array?.\n");
     }
+}
+
+void list_clear_free(List* list, void free_func(void* reference, ...)) {
+    for(int i = 0; i < list->curr_length; i++) {
+        free_func(list->data[i]);
+    }
+
+    // Clear freed pointers
+    list_clear(list);
 }
