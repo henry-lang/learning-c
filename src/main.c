@@ -34,10 +34,11 @@ void test_list_advanced() {
 
 int main() {
     String* name = string_init("Henry");
-    for(int i = 0; i < 2; i++) {
-        string_append(name, " Langmack");
+    string_append(name, " Langmack");
+    for(int i = 0; i < 5; i++) {
+        string_insert(name, "test", 2);
     }
-    string_insert(name, "test", 4);
+
 
     printf("%s\n", name->data);
     printf("%s: %lu\n", "Allocated: ", name->capacity);

@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -33,10 +34,11 @@ bool string_insert(String* string, const char* to_insert, const size_t index) {
         if(!string_realloc(string, needed_size)) return false;
     }
 
-    memmove(string->data + (string->length - index), string->data, (string->length - index));
-    strcpy(string->data + index, to_insert);
-
     string->length = string->length + added_length;
+
+    memmove(string->data + index + added_length, string->data + added_length, string->length - index);
+    memcpy(string->data + index, to_insert, added_length);
+
 
     return true;
 }
