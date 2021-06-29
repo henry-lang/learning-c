@@ -25,30 +25,35 @@ void string_set(String* string, const char* source) {
     strcpy(string->data, source);
 }
 
-void string_insert(String* string, const char* to_insert, const int index) {
-    size_t needed_size = strlen(to_insert);
-    size_t new_size = string->length + needed_size + 1;
+bool string_insert(String* string, const char* to_insert, const size_t index) {
+    size_t added_length = strlen(to_insert);
+    size_t needed_size = string->length + added_length + 1;
 
     if(needed_size > string->capacity) {
-
+        if(!string_realloc(string, needed_size)) return false;
     }
 
-    string->length = string->length + strlen(to_insert);
-    char* new = realloc(string->data, sizeof(char) * string->length + 1);
-    if(new == NULL) return;
+    memmove(string->data + (string->length - index), string->data, (string->length - index));
+    strcpy(string->data + index, to_insert);
+
+    string->length = string->length + added_length;
+
+    return true;
 }
 
-void string_append(String* string, const char* to_append) {
-    const size_t len_original = string->length;
-    const size_t len_to_append = strlen(to_append);
+bool string_append(String* string, const char* to_append) {
+    const size_t added_length = string->length;
+    const size_t needed_size = string->length + added_length + strlen(to_append);
 
-    char* new = realloc(string->data, len_original + len_to_append + 1);
-    if(new == NULL) return;
-    string->data = new;
+    if(needed_size > string->capacity) {
+        if(!string_realloc(string, needed_size)) return false;
+    }
 
     strcat(string->data, to_append);
 
-    string->length = string->length + strlen(to_append);
+    string->length = string->length + added_length;
+
+    return true;
 }
 
 bool string_realloc(String* string, const size_t size) {
@@ -61,6 +66,7 @@ bool string_realloc(String* string, const size_t size) {
     if(new_data == NULL) return false;
 
     string->data = new_data;
+    string->capacity = new_size;
     return true;
 }
 

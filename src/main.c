@@ -7,12 +7,12 @@
 void test_list() {
     List* list = list_init();
 
-    for(char i = 0; i < 100; i++) {
+    for(int i = 0; i < 10000; i++) {
         list_push(list, i);
     }
 
-    for(char i = 0; i < list_length(list); i++) {
-        printf("%c\n", list_get_cast(list, i, char));
+    for(int i = 0; i < list_length(list); i++) {
+        printf("%c\n", list_get_cast(list, i, int));
     }
 
     printf("Length: %d\n", list->curr_length);
@@ -34,8 +34,13 @@ void test_list_advanced() {
 
 int main() {
     String* name = string_init("Henry");
-    for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 2; i++) {
         string_append(name, " Langmack");
     }
+    string_insert(name, "test", 4);
+
+    printf("%s\n", name->data);
+    printf("%s: %lu\n", "Allocated: ", name->capacity);
+    printf("%s: %lu\n", "Length: ", name->length);
     string_free(name);
 }
