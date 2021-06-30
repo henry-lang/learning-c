@@ -17,6 +17,8 @@ void string_set(String* string, const char* source);
 bool string_insert(String* string, const char* to_insert, size_t index);
 bool string_append(String* string, const char* to_append);
 
+void string_remove(String* string, size_t index);
+
 bool string_realloc(String* string, size_t size);
 
 void string_free(String* string);

@@ -34,11 +34,10 @@ bool string_insert(String* string, const char* to_insert, const size_t index) {
         if(!string_realloc(string, needed_size)) return false;
     }
 
-    string->length = string->length + added_length;
+    string->length += added_length;
 
-    memmove(string->data + index + added_length, string->data + added_length, string->length - index);
+    memmove(string->data + index + added_length, string->data + index, string->length - index);
     memcpy(string->data + index, to_insert, added_length);
-
 
     return true;
 }
@@ -51,11 +50,19 @@ bool string_append(String* string, const char* to_append) {
         if(!string_realloc(string, needed_size)) return false;
     }
 
+    string->length += added_length;
+
     strcat(string->data, to_append);
 
-    string->length = string->length + added_length;
-
     return true;
+}
+
+void string_remove(String* string, const size_t index) {
+    printf("%lu\n", string->length - index - 1);
+    printf("%p\n", string->data + index);
+    printf("%p\n", string->data + index + 1);
+    memmove(string->data + index, string->data + index + 1, string->length - index + 4);
+    string->length--;
 }
 
 bool string_realloc(String* string, const size_t size) {
