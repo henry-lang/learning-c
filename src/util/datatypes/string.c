@@ -12,7 +12,8 @@ String* string_init(const char* source) {
     string->length = source_length;
     string->capacity = source_length + 1;
     string->data = malloc(sizeof(char) * string->capacity);
-    strcpy(string->data, source);
+    memcpy(string->data, source, string->length);
+    string->data[string->length] = '\0';
 
     return string;
 }
@@ -36,8 +37,8 @@ bool string_insert(String* string, const char* to_insert, const size_t index) {
 
     string->length += added_length;
 
-    memmove(string->data + index + added_length, string->data + index, string->length - index);
-    memcpy(string->data + index, to_insert, added_length);
+    memmove(&string->data[index + added_length], &string->data[index], string->length - index + 1);
+    memcpy(&string->data[index], to_insert, added_length);
 
     return true;
 }
@@ -58,10 +59,7 @@ bool string_append(String* string, const char* to_append) {
 }
 
 void string_remove(String* string, const size_t index) {
-    printf("%lu\n", string->length - index - 1);
-    printf("%p\n", string->data + index);
-    printf("%p\n", string->data + index + 1);
-    memmove(string->data + index, string->data + index + 1, string->length - index + 4);
+    memmove(&string->data[index], &string->data[index + 1], string->length - index + 4);
     string->length--;
 }
 
